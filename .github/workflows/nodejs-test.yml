@@ -1,0 +1,35 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch if it's not 'main'
+  pull_request:
+    branches:
+      - main  # Change this to your default branch if it's not 'main'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'  # Specify the Node.js version you want to use
+
+      - name: Install dependencies
+        run: npm install  # or yarn install if you're using Yarn
+
+      - name: Run tests
+        run: npm test  # or yarn test if you're using Yarn
+
+      - name: Upload test results
+        if: always()  # This ensures the step runs regardless of the test result
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: ./test-results  # Adjust this path if you have specific test result files
