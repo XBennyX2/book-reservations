@@ -10,6 +10,7 @@ const bookRoutes = require("./routes/books");
 const reservationRoutes = require("./routes/reservations");
 
 // Initialize app
+const express = require('express');
 const app = express();
 
 // Apply middleware
